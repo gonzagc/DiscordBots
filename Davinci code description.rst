@@ -2,8 +2,14 @@ This code is a Discord bot that uses the OpenAI API to generate text based on us
 
 
 import openai #Imports the openai library, which is used to interact with the OpenAI API and generate text
+
+
 import discord #Imports the discord library, which provides an interface for interacting with the Discord API and creating bots.
+
+
 import re #Imports the re library for working with regular expressions
+
+
 from discord import Intents #Imports the Intents class from the discord library, which is used to enable and customize the events that the bot can receive. Necessary for the correct functioning of the bot.
 
 
@@ -12,16 +18,20 @@ from discord import Intents #Imports the Intents class from the discord library,
 #openai api key
 openai.api_key = "-----------------"
 
+
 #Intents allow the bot to receive specific information about the events that occur in a server. In this case, the bot will have administrator permissions
 intents = Intents.default()
 intents.members = True
 
+
 client = discord.Client(intents=intents)
+
 
 @client.event
 async def on_ready():
     print("Logged in as {0.user}".format(client))
 #Prints a message indicating that the bot has logged in.
+
 
 @client.event
 async def on_message(message):
@@ -29,12 +39,14 @@ async def on_message(message):
         return
 #It is triggered whenever a message is sent in the server. The code checks if the author of the message is not the bot itself to avoid responding to its own messages.
 
+
     if client.user.mentioned_in(message):
         prompt = re.sub(r'<@[!&]?[\d]+>\s*', '', message.content)
         response = generate_text(prompt)
         await message.channel.send(response)
 #In this case, the bot will respond when the message sent by the user in the Discord text channel contains a mention to the bot. It can be changed to a command or whatever the user needs.
 #The code extracts the prompt by removing the mention using a regular expression.
+
 
 def generate_text(prompt):
     response = openai.Completion.create(
@@ -48,6 +60,7 @@ def generate_text(prompt):
     )
     return response.choices[0].text
 #The generate_text function takes a prompt as input and uses the OpenAI API to generate text based on that prompt. It creates a completion request to the OpenAI API with the specified parameters, such as the prompt, maximum tokens, and temperature. The generated text is returned as the output of the function.
+
 
 #Discord api key
 client.run("----------------")
