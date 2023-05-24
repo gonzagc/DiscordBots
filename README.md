@@ -1,4 +1,4 @@
-# Discord-IAs
+# Discord-Bots
 Integration of AI APIs in Python to Discord bots
 The bots work by mentioning them in the text channel followed by the prompt. They can be set to respond to any other command desired by the user. Additionally, they can be configured. For Davinci, the creativity of the responses can be adjusted, and the number of repeated words in its response is limited to 4097 characters between the prompt and the text channel response. The model used is text-davinci-003.
 
